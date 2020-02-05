@@ -8,6 +8,9 @@ import { AppRoutes } from './app';
 // Create connection with database
 createConnection()
   .then(async connection => {
+    // Run migrations
+    connection.runMigrations();
+
     // create express app
     const app = express();
     app.use(bodyParser.json());
@@ -25,9 +28,9 @@ createConnection()
       );
     });
 
-    // run app
+    // Set a listen port for app
     app.listen(3000);
 
-    console.log('Express application is up and running on port 3000');
+    console.log('Application "Delivery" is up and running on port 3000');
   })
   .catch(error => console.log('Connection error: ', error));
