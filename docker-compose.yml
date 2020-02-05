@@ -1,17 +1,9 @@
 version: '3.7'
 
 services:
-  database:
-    container_name: database
-    build: .
-    ports:
-      - 8080:8080
-    depends_on:
-      - delivery-pg
-
-  delivery-pg:
+  delivery-db-pg:
     image: postgres:11
-    container_name: delivery-pg
+    container_name: delivery-db-pg
     restart: always
     environment:
       - POSTGRES_PASSWORD=pass

@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { getManager } from 'typeorm';
-import { Restaurants } from '../objects/restaurants';
+import { Restaurants } from '../entity/restaurants';
 
 // Saves a new restaurant info.
 

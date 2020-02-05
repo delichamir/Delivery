@@ -6,7 +6,7 @@
   "password": "pass",
   "database": "delivery_db",
   "synchronize": true,
-  "entities": ["src/objects/*.js"],
+  "entities": ["src/entity/*.js"],
   "migrations": ["src/migration/*.js"],
   "cli": {
     "entitiesDir": "src/entity",
