@@ -5,8 +5,8 @@ Technologies used: Typescript, Express, TypeORM, PostgreSQL .
 
 # Project info:
 
-![image](https://gitlab.com/_amix/delivery/-/tree/master/image/project.png)
+![image](https://gitlab.com/_amix/delivery/-/blob/master/image/PROJECT.png)
 
 # Project Relational Schemas:
 
-![image](https://gitlab.com/_amix/delivery/-/tree/master/image/delivery_ERD.png)
+![image](https://gitlab.com/_amix/delivery/-/blob/master/image/delivery_ERD.png)
