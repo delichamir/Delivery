@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { getManager } from 'typeorm';
-import { Restaurants } from '../entity/restaurants';
+import { Restaurants } from '../entity/restaurant';
 
 // Loads list of restaurants from the database.
 export async function postGetAllAction(request: Request, response: Response) {

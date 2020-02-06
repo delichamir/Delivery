@@ -7,20 +7,13 @@ import { postSaveAction } from '../controller/PostSaveAction';
 // GET requests
 export const AppRoutes = [
   {
-    path: '/restaurants',
+    path: '/restaurant',
     method: 'get',
     action: postGetAllAction
   },
   {
-    path: '/restaurants/:id',
+    path: '/restaurant/:id',
     method: 'get',
     action: postGetByIdAction
-  },
-
-  // POST requests
-  {
-    path: '/restaurants',
-    method: 'post',
-    action: postSaveAction
   }
 ];
