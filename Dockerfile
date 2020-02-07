@@ -1,10 +1,11 @@
 FROM node:13
-COPY . /app
-WORKDIR /app
+COPY package*.json ./
+COPY . .
+WORKDIR /
 RUN npm install
 RUN npm run dev
 EXPOSE 3000
-CMD [ "npm", "run"]
+
 
 
 # FROM image name                                   -using based image to start build process
@@ -18,3 +19,4 @@ CMD [ "npm", "run"]
 # MAINTAINER name                                   -set author name
 # USER UID                                          -set user id , that will execute docker container
 # VOLUME /my_files                                  -set path where all file will be located into cintainer
+

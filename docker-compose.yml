@@ -27,7 +27,8 @@ services:
       - VIRTUAL_HOST=delivery-backend.docker
       - VIRTUAL_PORT=3000
     volumes:
-      - backend:/app
+      - backend:./
+      
     expose:
       - "3000"
     networks:
