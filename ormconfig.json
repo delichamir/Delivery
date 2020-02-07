@@ -1,15 +1,15 @@
 {
-  "type": "postgresql",
-  "host": "localhost",
-  "port": 5432,
-  "username": "admin",
-  "password": "pass",
-  "database": "delivery_db",
-  "synchronize": true,
-  "entities": ["src/entity/*.js"],
-  "migrations": ["src/migration/*.js"],
-  "cli": {
-    "entitiesDir": "src/entity",
-    "migrationsDir": "src/migration"
-  }
+	"type": "postgres",
+	"host": "localhost",
+	"port": 5432,
+	"username": "admin",
+	"password": "pass",
+	"database": "delivery_db",
+	"synchronize": true,
+	"entities": ["src/entity/*.ts"],
+	"migrations": ["src/migration/*.ts"],
+	"cli": {
+		"entitiesDir": "src/entity",
+		"migrationsDir": "src/migration"
+	}
 }

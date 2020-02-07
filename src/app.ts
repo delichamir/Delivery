@@ -6,14 +6,14 @@ import { postSaveAction } from '../controller/PostSaveAction';
 
 // GET requests
 export const AppRoutes = [
-  {
-    path: '/restaurant',
-    method: 'get',
-    action: postGetAllAction
-  },
-  {
-    path: '/restaurant/:id',
-    method: 'get',
-    action: postGetByIdAction
-  }
+	{
+		path: '/restaurant',
+		method: 'get',
+		action: postGetAllAction
+	},
+	{
+		path: '/restaurant/:id',
+		method: 'get',
+		action: postGetByIdAction
+	}
 ];

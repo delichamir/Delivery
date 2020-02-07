@@ -1,20 +1,23 @@
 {
-  "name": "delivery",
-  "version": "1.0.0",
-  "description": "",
-  "main": "server.js",
-  "scripts": {
-    "dev": "nodemon ./src/server.ts --ext ts --exec ts-node",
-    "typeorm:cli": "ts-node ./node_modules/typeorm/cli -f ./src/ormconfig.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "expres": "0.0.5",
-    "express": "^4.17.1",
-    "postgresql": "0.0.1",
-    "typeorm": "^0.2.22"
-  }
+	"name": "delivery",
+	"version": "1.0.0",
+	"description": "",
+	"main": "server.js",
+	"scripts": {
+		"dev": "nodemon ./src/server.ts --ext ts --exec ts-node",
+		"typeorm:cli": "ts-node ./node_modules/typeorm/cli -f ./src/ormconfig.ts",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"@types/es6-promise": "^3.3.0",
+		"expres": "0.0.5",
+		"express": "^4.17.1",
+		"nodemon": "^2.0.2",
+		"pg": "^7.18.1",
+		"postgresql": "0.0.1",
+		"typeorm": "^0.2.22"
+	}
 }
