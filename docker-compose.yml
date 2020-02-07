@@ -9,10 +9,33 @@ services:
       - POSTGRES_PASSWORD=pass
       - POSTGRES_USER=admin
       - POSTGRES_DB=delivery_db
+    hostname: localhost
+    networks:
+      - dev-network
     ports:
       - 5432:5432
     volumes:
       - pgdata:/var/lib/postgresql/data
 
+services:
+  delivery-backend:
+    container_name: delivery-backend
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - VIRTUAL_HOST=delivery-backend.docker
+      - VIRTUAL_PORT=3000
+    volumes:
+      - backend:/app
+    expose:
+      - "3000"
+    networks:
+      - dev-network
+
 volumes:
   pgdata:
+  backend:
+
+networks:
+  dev-network:

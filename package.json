@@ -9,7 +9,7 @@
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"keywords": [],
-	"author": "",
+	"author": "Delich Amir",
 	"license": "ISC",
 	"dependencies": {
 		"@types/es6-promise": "^3.3.0",
