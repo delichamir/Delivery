@@ -1,9 +1,11 @@
 import 'reflect-metadata';
 import { createConnection } from 'typeorm';
 import { Request, Response } from 'express';
-import * as express from 'express';
+//import * as exp from 'express';
 import * as bodyParser from 'body-parser';
 import { AppRoutes } from './app';
+
+const express = require('express');
 
 // Create connection with database
 createConnection()
@@ -11,7 +13,7 @@ createConnection()
 		// Run migrations
 		connection.runMigrations();
 
-		// create express app
+		// Create express app
 		const app = express();
 		app.use(bodyParser.json());
 
