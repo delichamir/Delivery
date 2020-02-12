@@ -5,15 +5,15 @@ export class Restaurant {
 	@PrimaryGeneratedColumn()
 	restaurant_id: number;
 
-	@Column('char varying')
+	@Column()
 	name: string;
 
-	@Column('char varying')
+	@Column()
 	address: string;
 
-	@Column('int32')
+	@Column()
 	phone: number;
 
-	@Column('int32')
+	@Column()
 	menu_id: number;
 }

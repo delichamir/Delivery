@@ -1,40 +1,41 @@
 version: '3.7'
 
 services:
-  delivery-db-pg:
-    image: postgres:11
-    container_name: delivery-db-pg
-    restart: always
-    environment:
-      - POSTGRES_PASSWORD=pass
-      - POSTGRES_USER=admin
-      - POSTGRES_DB=delivery_db
-    hostname: localhost
-    networks:
-      - dev-network
-    ports:
-      - 5432:5432
-    volumes:
-      - pgdata:/var/lib/postgresql/data
+    delivery_db:
+        image: postgres:11
+        container_name: delivery_db
+        restart: always
+        environment:
+            - POSTGRES_PASSWORD=pass
+            - POSTGRES_USER=admin
+            - POSTGRES_DB=delivery_db
+        hostname: localhost
+        networks:
+            - dev_network
+        ports:
+            - 5432:5432
+        volumes:
+            - pgdata:/var/lib/postgresql/data
 
-services:
-  delivery-backend:
-    container_name: delivery-backend
-    build:
-      context: .
-      dockerfile: Dockerfile
-    environment:
-      - VIRTUAL_HOST=delivery-backend.docker
-      - VIRTUAL_PORT=3000
-    volumes:
-      - ./src:/app/src
-    expose:
-      - "3000"
-    networks:
-      - dev-network
+    delivery_backend:
+        container_name: delivery_backend
+        build:
+            context: .
+            dockerfile: Dockerfile
+        depends_on:
+            - delivery_db
+        environment:
+            - VIRTUAL_HOST=delivery-backend.docker
+            - VIRTUAL_PORT=3000
+        volumes:
+            - ./src:/app/src
+        expose:
+            - '3000'
+        networks:
+            - dev_network
 
 volumes:
-  pgdata:
-  
+    pgdata:
+
 networks:
-  dev-network:
+    dev_network:
