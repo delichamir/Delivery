@@ -2,27 +2,17 @@ import { MigrationInterface, QueryRunner } from 'typeorm';
 
 export class dump1580912108354 implements MigrationInterface {
 	public async up(queryRunner: QueryRunner): Promise<any> {
-		// Drop exists tables
-		await queryRunner.query(`DROP TABLE IF EXISTS "clinet"`);
-		await queryRunner.query(`DROP TABLE IF EXISTS "restaurant"`);
-		await queryRunner.query(`DROP TABLE IF EXISTS "product"`);
-		await queryRunner.query(`DROP TABLE IF EXISTS "restaurant_product"`);
-		await queryRunner.query(`DROP TABLE IF EXISTS "cart_detail"`);
-		await queryRunner.query(`DROP TABLE IF EXISTS "cart"`);
-		await queryRunner.query(`DROP TABLE IF EXISTS "order_detail"`);
-		await queryRunner.query(`DROP TABLE IF EXISTS "menu"`);
-		await queryRunner.query(`DROP TABLE IF EXISTS "order"`);
 		// Create new tables with info
 
 		// Create table client
 		await queryRunner.query(`CREATE TABLE "client" (
       "client_id" SERIAL,
-      login NUMERIC(20) DEFAULT NULL,
-      password VARCHAR(20) DEFAULT NULL,
-      full_name VARCHAR(20) DEFAULT NULL,
-      email VARCHAR(20) DEFAULT NULL,
-      token VARCHAR(50) DEFAULT NULL,
-      reg_data TIMESTAMP NULL DEFAULT NULL,
+      "full_name" VARCHAR(20) DEFAULT NULL,
+      "password" VARCHAR(100) DEFAULT NULL,
+      "role" VARCHAR() NOT NULL,
+      "email" VARCHAR(20) DEFAULT NULL,
+      "createdAt" TIMESTAMP NULL DEFAULT NULL,
+      "updatedAt" TIMESTAMP NULL DEFAULT NULL,
       PRIMARY KEY ("client_id") )`);
 
 		// Create table restaurant
