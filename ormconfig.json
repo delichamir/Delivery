@@ -7,7 +7,9 @@
 	"database": "delivery_db",
 	"synchronize": true,
 	"entities": ["src/entity/*.ts"],
+	"migrationsRun": true,
 	"migrations": ["src/migration/*.ts"],
+	"logging": true,
 	"cli": {
 		"entitiesDir": "src/entity",
 		"migrationsDir": "src/migration"
