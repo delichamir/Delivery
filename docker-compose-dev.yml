@@ -17,6 +17,23 @@ services:
         volumes:
             - pgdata:/var/lib/postgresql/data
 
+    delivery_backend:
+        container_name: delivery_backend
+        build:
+            context: .
+            dockerfile: Dockerfile
+        depends_on:
+            - delivery_db
+        environment:
+            - VIRTUAL_HOST=delivery-backend.docker
+            - VIRTUAL_PORT=3000
+        volumes:
+            - ./src:/app/src
+        expose:
+            - '3000'
+        networks:
+            - dev_network
+
 volumes:
     pgdata:
 

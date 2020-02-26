@@ -9,7 +9,7 @@ class UserController {
 		// Get clients from database
 		const userRepository = getRepository(Client);
 		const users = await userRepository.find({
-			select: ['client_id', 'full_name', 'role']
+			select: ['client_id', 'full_name', 'role', 'email', 'createdAt']
 		});
 
 		// Send the users object
@@ -24,7 +24,7 @@ class UserController {
 		const userRepository = getRepository(Client);
 		try {
 			const user = await userRepository.findOneOrFail(id, {
-				select: ['client_id', 'full_name', 'role'] //We dont want to send the password on response
+				select: ['client_id', 'full_name', 'role', 'email']
 			});
 		} catch (error) {
 			res.status(404).send('User not found');
@@ -33,10 +33,11 @@ class UserController {
 
 	static newUser = async (req: Request, res: Response) => {
 		// Get parameters from the body
-		let { username, password, role } = req.body;
+		let { username, password, email, role } = req.body;
 		let user = new Client();
 		user.full_name = username;
 		user.password = password;
+		user.email = email;
 		user.role = role;
 
 		// Validade if the parameters are ok
@@ -59,7 +60,7 @@ class UserController {
 		}
 
 		// If all ok, send 201 response
-		res.status(201).send('User created');
+		res.status(201).send('User created successful');
 	};
 
 	static editUser = async (req: Request, res: Response) => {
@@ -67,7 +68,7 @@ class UserController {
 		const id = req.params.id;
 
 		// Get values from the body
-		const { username, role } = req.body;
+		const { username, password, email, role } = req.body;
 
 		// Try to find user on database
 		const userRepository = getRepository(Client);
@@ -82,6 +83,8 @@ class UserController {
 
 		// Validate the new values on model
 		user.full_name = username;
+		user.password = password;
+		user.email = email;
 		user.role = role;
 		const errors = await validate(user);
 		if (errors.length > 0) {

@@ -16,18 +16,18 @@ router.get(
 );
 
 // Create a new user
-router.post('/', [checkJwt, checkRole(['ADMIN'])], UserController.newUser);
+router.post('/add', [checkJwt, checkRole(['ADMIN'])], UserController.newUser);
 
 // Edit user by id
 router.patch(
-	'/:id([0-9]+)',
+	'/edit/:id([0-9]+)',
 	[checkJwt, checkRole(['ADMIN'])],
 	UserController.editUser
 );
 
 // Delete user by id
 router.delete(
-	'/:id([0-9]+)',
+	'/remove/:id([0-9]+)',
 	[checkJwt, checkRole(['ADMIN'])],
 	UserController.deleteUser
 );

@@ -1,6 +1,6 @@
 {
 	"type": "postgres",
-	"host": "delivery_db",
+	"host": "localhost",
 	"port": 5432,
 	"username": "admin",
 	"password": "pass",

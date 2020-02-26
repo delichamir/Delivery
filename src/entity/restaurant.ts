@@ -12,7 +12,7 @@ export class Restaurant {
 	address: string;
 
 	@Column()
-	phone: number;
+	phone: string;
 
 	@Column()
 	menu_id: number;
