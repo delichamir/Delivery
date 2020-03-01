@@ -6,7 +6,6 @@
 	"scripts": {
 		"tsc": "tsc",
 		"dev": "nodemon --watch 'src/**/*.ts'  --exec ts-node src/server.ts",
-		"dump": "./node_modules/.bin/ts-node ./node_modules/typeorm/cli.js migration:generate -n Dump",
 		"revert": "./node_modules/.bin/ts-node ./node_modules/typeorm/cli.js migration:revert",
 		"typeorm:cli": "ts-node ./node_modules/typeorm/cli -f ./ormconfig.ts",
 		"test": "echo \"Error: no test specified\" && exit 1"

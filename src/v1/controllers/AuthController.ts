@@ -11,7 +11,10 @@ class AuthController {
 		// Check if username and password are set
 		let { username, password } = req.body;
 		if (!(username && password)) {
-			res.status(400).send();
+			res.status(400).json({
+				message: 'username and password is required.',
+				status: 'false'
+			});
 		}
 
 		// Get user from database
@@ -20,12 +23,18 @@ class AuthController {
 		try {
 			user = await userRepository.findOneOrFail({ where: { username } });
 		} catch (error) {
-			res.status(401).send();
+			res.status(409).json({
+				message: 'This user is not find. Try another.'
+				status: 'false'
+			});
 		}
 
 		// Check if encrypted password match
-		if (!user.checkIfUnencryptedPasswordIsValid(password)) {
-			res.status(401).send();
+		if (!user.checkIfUnencryptedPasswordIsValid(username, password)) {
+			res.status(401).json({
+				message: 'username or password is incorrect. Try again',
+				status: 'false'
+			});
 			return;
 		}
 
@@ -37,7 +46,10 @@ class AuthController {
 		);
 
 		// Send the jwt in the response
-		res.send(token);
+		res.json({
+			token: token,
+			status: 'success'
+		});
 	};
 
 	static changePassword = async (req: Request, res: Response) => {
@@ -45,7 +57,7 @@ class AuthController {
 		const id = res.locals.jwtPayload.userId;
 
 		// Get parameters from the body
-		const { oldPassword, newPassword } = req.body;
+		const { username, oldPassword, newPassword } = req.body;
 		if (!(oldPassword && newPassword)) {
 			res.status(400).send();
 		}
@@ -60,7 +72,7 @@ class AuthController {
 		}
 
 		// Check if old password matchs
-		if (!user.checkIfUnencryptedPasswordIsValid(oldPassword)) {
+		if (!user.checkIfUnencryptedPasswordIsValid(username, oldPassword)) {
 			res.status(401).send();
 			return;
 		}

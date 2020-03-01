@@ -94,7 +94,7 @@ class RestaurantController {
 			return;
 		}
 
-		// Try to safe, if fails, that means username already in use
+		// Try to safe, if fails, that means restaurant already in use
 		try {
 			await restaurantRepository.save(restaurant);
 		} catch (e) {

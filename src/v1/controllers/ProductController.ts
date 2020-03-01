@@ -110,7 +110,7 @@ class ProductController {
 			return;
 		}
 
-		// Try to safe, if fails, that means username already in use
+		// Try to safe, if fails, that means product already in use
 		try {
 			await productRepository.save(product);
 		} catch (e) {

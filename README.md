@@ -9,7 +9,7 @@ Technologies used: Typescript, Express, TypeORM, PostgreSQL .
 
     docker-compose up
 
-#### 2. Run server with running migrations:
+#### 2. Run server with running dump migrations:
 
     npm run dev
 

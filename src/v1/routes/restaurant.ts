@@ -6,7 +6,11 @@ import { checkRole } from '../../middlewares/checkRole';
 const router = Router();
 
 // Get all restaurants
-router.get('/', [checkJwt, checkRole(['ADMIN'])], RestaurantController.listAll);
+router.get(
+	'/',
+	[checkJwt, checkRole(['ADMIN', 'CUSTOMER'])],
+	RestaurantController.listAll
+);
 
 // Get restaurant by id
 router.get(
