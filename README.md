@@ -7,10 +7,8 @@ Technologies used: Typescript, Express, TypeORM, PostgreSQL .
 
 #### 1. Run database on docker:
 
-\*
-docker-compose up \*
+    docker-compose up
 
 #### 2. Run server with running migrations:
 
-\*
-npm run dev\*
+    npm run dev
