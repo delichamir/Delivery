@@ -12,3 +12,11 @@ Technologies used: Typescript, Express, TypeORM, PostgreSQL .
 #### 2. Run server with running migrations:
 
     npm run dev
+
+#### 2. Create a new migration:
+
+    typeorm migration:create -n NameOfMigration
+
+#### 2. Revert last made migration:
+
+    npm run revert
