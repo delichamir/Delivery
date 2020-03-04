@@ -5,8 +5,10 @@ import { validate } from 'class-validator';
 
 import { Client } from '../../entity/client';
 import config from '../../config/config';
+import { checkPasswordValidation } from '../../middlewares/checkValidation';
 
 class AuthController {
+	// Authorization
 	static login = async (req: Request, res: Response) => {
 		// Check if username and password are set
 		let { username, password } = req.body;
@@ -24,13 +26,14 @@ class AuthController {
 			user = await userRepository.findOneOrFail({ where: { username } });
 		} catch (error) {
 			res.status(409).json({
-				message: 'This user is not find. Try another.'
+				message: 'This user is not find. Try another.',
 				status: 'false'
 			});
 		}
 
-		// Check if encrypted password match
-		if (!user.checkIfUnencryptedPasswordIsValid(username, password)) {
+		// Check if login and encrypted password match
+
+		if (!checkPasswordValidation(username, password)) {
 			res.status(401).json({
 				message: 'username or password is incorrect. Try again',
 				status: 'false'
@@ -52,6 +55,7 @@ class AuthController {
 		});
 	};
 
+	// Change password for user
 	static changePassword = async (req: Request, res: Response) => {
 		// Get ID from JWT
 		const id = res.locals.jwtPayload.userId;
@@ -72,7 +76,7 @@ class AuthController {
 		}
 
 		// Check if old password matchs
-		if (!user.checkIfUnencryptedPasswordIsValid(username, oldPassword)) {
+		if (!checkPasswordValidation(username, oldPassword)) {
 			res.status(401).send();
 			return;
 		}
