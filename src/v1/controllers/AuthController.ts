@@ -32,11 +32,11 @@ class AuthController {
 		}
 
 		// Check if login and encrypted password match
-		console.log('\n ################################### \n');
-		console.log(Validation(username, password));
-		console.log('\n ################################### \n');
+		let match = await Validation(username, password).catch(err => {
+			console.error('\n No such username find in base: ', err);
+		});
 
-		if (!Validation(username, password)) {
+		if (!match) {
 			res.status(401).json({
 				message: 'username or password is incorrect. Try again',
 				status: 'false'
