@@ -5,7 +5,7 @@ import { validate } from 'class-validator';
 
 import { Client } from '../../entity/client';
 import config from '../../config/config';
-import { checkPasswordValidation } from '../../middlewares/checkValidation';
+import { Validation } from '../../middlewares/checkValidation';
 
 class AuthController {
 	// Authorization
@@ -32,8 +32,11 @@ class AuthController {
 		}
 
 		// Check if login and encrypted password match
+		console.log('\n ################################### \n');
+		console.log(Validation(username, password));
+		console.log('\n ################################### \n');
 
-		if (!checkPasswordValidation(username, password)) {
+		if (!Validation(username, password)) {
 			res.status(401).json({
 				message: 'username or password is incorrect. Try again',
 				status: 'false'
@@ -76,7 +79,7 @@ class AuthController {
 		}
 
 		// Check if old password matchs
-		if (!checkPasswordValidation(username, oldPassword)) {
+		if (!Validation(username, oldPassword)) {
 			res.status(401).send();
 			return;
 		}
