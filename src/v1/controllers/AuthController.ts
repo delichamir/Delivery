@@ -10,11 +10,11 @@ import { Validation } from '../../middlewares/checkValidation';
 class AuthController {
 	// Authorization
 	static login = async (req: Request, res: Response) => {
-		// Check if username and password are set
-		let { username, password } = req.body;
-		if (!(username && password)) {
+		// Check if email and password are set
+		let { email, password } = req.body;
+		if (!(email && password)) {
 			res.status(400).json({
-				message: 'username and password is required.',
+				message: 'email and password is required.',
 				status: 'false'
 			});
 		}
@@ -23,22 +23,22 @@ class AuthController {
 		const userRepository = getRepository(Client);
 		let user: Client;
 		try {
-			user = await userRepository.findOneOrFail({ where: { username } });
+			user = await userRepository.findOneOrFail({ where: { email } });
 		} catch (error) {
 			res.status(409).json({
-				message: 'This user is not find. Try another.',
+				message: 'This email is not find. Try another.',
 				status: 'false'
 			});
 		}
 
-		// Check if login and encrypted password match
-		let match = await Validation(username, password).catch(err => {
-			console.error('\n No such username find in base: ', err);
+		// Check if email and encrypted password match
+		let match = await Validation(email, password).catch(err => {
+			console.error('\n No such email find in base: ', err);
 		});
 
 		if (!match) {
 			res.status(401).json({
-				message: 'username or password is incorrect. Try again',
+				message: 'email or password is incorrect. Try again',
 				status: 'false'
 			});
 			return;
@@ -46,7 +46,7 @@ class AuthController {
 
 		// Sing JWT, valid for 1 hour
 		const token = jwt.sign(
-			{ userId: user.client_id, username: user.full_name },
+			{ userId: user.id, email: user.email },
 			config.jwtSecret,
 			{ expiresIn: '1h' }
 		);
@@ -64,7 +64,7 @@ class AuthController {
 		const id = res.locals.jwtPayload.userId;
 
 		// Get parameters from the body
-		const { username, oldPassword, newPassword } = req.body;
+		const { email, oldPassword, newPassword } = req.body;
 		if (!(oldPassword && newPassword)) {
 			res.status(400).send();
 		}
@@ -79,7 +79,7 @@ class AuthController {
 		}
 
 		// Check if old password matchs
-		if (!Validation(username, oldPassword)) {
+		if (!Validation(email, oldPassword)) {
 			res.status(401).send();
 			return;
 		}

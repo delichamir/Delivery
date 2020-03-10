@@ -3,14 +3,14 @@ import { Client } from '../entity/client';
 import * as bcrypt from 'bcryptjs';
 
 export const Validation = async (
-	login: string,
+	email: string,
 	unencryptedPassword: string
 ) => {
 	const clientRepository = getManager().getRepository(Client);
-	const user = await clientRepository.findOne({ full_name: login });
+	const user = await clientRepository.findOne({ email: email });
 
 	if (
-		login === user.full_name &&
+		email === user.email &&
 		bcrypt.compareSync(unencryptedPassword, user.password)
 	) {
 		return true;
