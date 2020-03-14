@@ -1,7 +1,7 @@
 import { MigrationInterface, QueryRunner, getRepository } from 'typeorm';
 import { Product } from '../entity/product';
 
-export class AddProducts1583060928668 implements MigrationInterface {
+export class AddProduct1584201906921 implements MigrationInterface {
 	public async up(queryRunner: QueryRunner): Promise<any> {
 		const productRepository = getRepository(Product);
 

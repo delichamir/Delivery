@@ -1,7 +1,7 @@
 import { MigrationInterface, QueryRunner, getRepository } from 'typeorm';
 import { Client } from '../entity/client';
 
-export class AddUsers1583060614864 implements MigrationInterface {
+export class AddClient1584201704060 implements MigrationInterface {
 	public async up(queryRunner: QueryRunner): Promise<any> {
 		const userRepository = getRepository(Client);
 

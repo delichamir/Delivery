@@ -1,16 +1,35 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import {
+	Entity,
+	PrimaryGeneratedColumn,
+	Column,
+	CreateDateColumn,
+	UpdateDateColumn,
+	Unique
+} from 'typeorm';
+import { Length, IsNotEmpty } from 'class-validator';
 
 @Entity()
+@Unique(['client_id'])
+@Unique(['cart_id'])
 export class Order {
 	@PrimaryGeneratedColumn()
-	order_id: number;
+	id: number;
 
 	@Column()
+	@Length(4, 50)
 	status: string;
 
 	@Column()
 	client_id: number;
 
 	@Column()
-	order_detail_id: number;
+	cart_id: number;
+
+	@Column()
+	@CreateDateColumn()
+	createdAt: Date;
+
+	@Column()
+	@UpdateDateColumn()
+	updatedAt: Date;
 }

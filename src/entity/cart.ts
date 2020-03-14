@@ -1,16 +1,29 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import {
+	Entity,
+	PrimaryGeneratedColumn,
+	Column,
+	CreateDateColumn,
+	UpdateDateColumn,
+	Unique
+} from 'typeorm';
 
 @Entity()
+@Unique(['client_id'])
 export class Cart {
 	@PrimaryGeneratedColumn()
-	cart_id: number;
-
-	@Column()
-	amount: number;
+	id: number;
 
 	@Column()
 	client_id: number;
 
 	@Column()
-	product_id: number;
+	amount: number;
+
+	@Column()
+	@CreateDateColumn()
+	createdAt: Date;
+
+	@Column()
+	@UpdateDateColumn()
+	updatedAt: Date;
 }

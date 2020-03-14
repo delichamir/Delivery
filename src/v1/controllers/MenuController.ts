@@ -10,7 +10,7 @@ class MenuController {
 		// Get menu list from database
 		const menuRepository = getRepository(Menu);
 		const product = await menuRepository.find({
-			select: ['menu_id', 'name']
+			select: ['id', 'name']
 		});
 
 		res.send(product);
@@ -25,7 +25,7 @@ class MenuController {
 		const menuRepository = getRepository(Menu);
 		try {
 			const user = await menuRepository.findOneOrFail(id, {
-				select: ['menu_id', 'name']
+				select: ['id', 'name']
 			});
 		} catch (error) {
 			res.status(404).send('Product not found');

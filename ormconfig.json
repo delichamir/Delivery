@@ -5,7 +5,7 @@
 	"username": "admin",
 	"password": "pass",
 	"database": "delivery_db",
-	"synchronize": true,
+	"synchronize": false,
 	"entities": ["src/entity/*.ts"],
 	"migrationsRun": true,
 	"migrations": ["src/migration/*.ts"],

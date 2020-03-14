@@ -10,7 +10,7 @@ class RestaurantController {
 		// Get restaurants list from database
 		const restaurantRepository = getRepository(Restaurant);
 		const restaurant = await restaurantRepository.find({
-			select: ['restaurant_id', 'name', 'address', 'phone', 'menu_id']
+			select: ['id', 'name', 'address', 'phone']
 		});
 
 		res.send(restaurant);
@@ -25,7 +25,7 @@ class RestaurantController {
 		const restaurantRepository = getRepository(Restaurant);
 		try {
 			const user = await restaurantRepository.findOneOrFail(id, {
-				select: ['restaurant_id', 'name', 'address', 'phone', 'menu_id']
+				select: ['id', 'name', 'address', 'phone']
 			});
 		} catch (error) {
 			res.status(404).send('Restaurnts not found');
@@ -35,13 +35,12 @@ class RestaurantController {
 	//newRestaurant
 	static newRestaurant = async (req: Request, res: Response) => {
 		// Get parameters from the body
-		let { name, address, phone, menu_id } = req.body;
+		let { name, address, phone } = req.body;
 		let restaurant = new Restaurant();
 
 		restaurant.name = name;
 		restaurant.address = address;
 		restaurant.phone = phone;
-		restaurant.menu_id = menu_id;
 
 		// Validade if the parameters are ok
 		const errors = await validate(restaurant);
@@ -69,7 +68,7 @@ class RestaurantController {
 		const id = req.params.id;
 
 		// Get values from the body
-		const { name, address, phone, menu_id } = req.body;
+		const { name, address, phone } = req.body;
 
 		// Try to find user on database
 		const restaurantRepository = getRepository(Restaurant);
@@ -86,7 +85,6 @@ class RestaurantController {
 		restaurant.name = name;
 		restaurant.address = address;
 		restaurant.phone = phone;
-		restaurant.menu_id = menu_id;
 
 		const errors = await validate(restaurant);
 		if (errors.length > 0) {

@@ -11,27 +11,28 @@ import * as bcrypt from 'bcryptjs';
 
 @Entity()
 @Unique(['email'])
+@Unique(['phone'])
 export class Client {
 	@PrimaryGeneratedColumn()
 	id: number;
 
 	@Column()
-	@Length(4, 20)
+	@Length(4, 50)
 	full_name: string;
-
-	@Column()
-	@Length(4, 100)
-	password: string;
 
 	@Column()
 	phone: string;
 
 	@Column()
-	@IsNotEmpty()
-	role: string;
+	email: string;
 
 	@Column()
-	email: string;
+	@Length(4, 64)
+	password: string;
+
+	@Column()
+	@IsNotEmpty()
+	role: string;
 
 	@Column()
 	@CreateDateColumn()

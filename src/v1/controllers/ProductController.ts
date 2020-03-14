@@ -10,14 +10,7 @@ class ProductController {
 		// Get products list from database
 		const productRepository = getRepository(Product);
 		const product = await productRepository.find({
-			select: [
-				'product_id',
-				'name',
-				'category',
-				'count',
-				'price',
-				'menu_id'
-			]
+			select: ['id', 'name', 'category', 'count', 'price', 'menu_id']
 		});
 
 		res.send(product);
@@ -31,15 +24,8 @@ class ProductController {
 		// Get the product from database
 		const productRepository = getRepository(Product);
 		try {
-			const user = await productRepository.findOneOrFail(id, {
-				select: [
-					'product_id',
-					'name',
-					'category',
-					'count',
-					'price',
-					'menu_id'
-				]
+			const product = await productRepository.findOneOrFail(id, {
+				select: ['id', 'name', 'category', 'count', 'price', 'menu_id']
 			});
 		} catch (error) {
 			res.status(404).send('Product not found');

@@ -9,7 +9,7 @@ class UserController {
 		// Get clients from database
 		const userRepository = getRepository(Client);
 		const users = await userRepository.find({
-			select: ['client_id', 'full_name', 'role', 'email', 'createdAt']
+			select: ['id', 'full_name', 'phone', 'role', 'email', 'createdAt']
 		});
 
 		// Send the users object
@@ -24,7 +24,7 @@ class UserController {
 		const userRepository = getRepository(Client);
 		try {
 			const user = await userRepository.findOneOrFail(id, {
-				select: ['client_id', 'full_name', 'role', 'email']
+				select: ['id', 'full_name', 'phone', 'role', 'email']
 			});
 		} catch (error) {
 			res.status(404).send('User not found');

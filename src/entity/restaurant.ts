@@ -1,19 +1,19 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Length, IsNotEmpty } from 'class-validator';
 
 @Entity()
 export class Restaurant {
 	@PrimaryGeneratedColumn()
-	restaurant_id: number;
+	id: number;
 
 	@Column()
+	@Length(4, 50)
 	name: string;
 
 	@Column()
+	@Length(4, 100)
 	address: string;
 
 	@Column()
 	phone: string;
-
-	@Column()
-	menu_id: number;
 }

@@ -20,9 +20,7 @@ createConnection()
 		app.use('/api/v1', routes);
 
 		app.listen(3000, () => {
-			console.log(
-				'Application "Delivery" is up and running on port 3000'
-			);
+			console.log('API => "Delivery" is up and running on port 3000');
 		});
 	})
 	.catch(error => console.log('Connection error: ', error));
