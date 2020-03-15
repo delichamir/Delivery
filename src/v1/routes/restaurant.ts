@@ -10,14 +10,14 @@ const restaurant_router = Router();
 restaurant_router.get(
 	'/',
 	[checkJwt, checkRole(['ADMIN', 'CUSTOMER'])],
-	RestaurantController.listAll
+	RestaurantController.ListAllRestaurants
 );
 
 // Get restaurant by id
 restaurant_router.get(
 	'/:id([0-9]+)',
 	[checkJwt, checkRole(['ADMIN', 'CUSTOMER'])],
-	RestaurantController.getOneById
+	RestaurantController.GetOneRestaurantById
 );
 
 // Get list menu of restaurant
@@ -32,27 +32,6 @@ restaurant_router.get(
 	'/:id([0-9]+)/menu/:menu_id([0-9]+)',
 	[checkJwt, checkRole(['ADMIN', 'CUSTOMER'])],
 	RestaurantController.restaurantMenuOne
-);
-
-// Create a new restaurant
-restaurant_router.post(
-	'/add',
-	[checkJwt, checkRole(['ADMIN'])],
-	RestaurantController.newRestaurant
-);
-
-// Edit restaurant by id
-restaurant_router.patch(
-	'/edit/:id([0-9]+)',
-	[checkJwt, checkRole(['ADMIN'])],
-	RestaurantController.editRestaurant
-);
-
-// Delete restaurant by id
-restaurant_router.delete(
-	'/remove/:id([0-9]+)',
-	[checkJwt, checkRole(['ADMIN'])],
-	RestaurantController.deleteRestaurant
 );
 
 export default restaurant_router;

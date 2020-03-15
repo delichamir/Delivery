@@ -6,7 +6,7 @@ import { Product } from '../../entity/product';
 
 class ProductController {
 	// List of all products
-	static listAll = async (req: Request, res: Response) => {
+	static ListALLProducts = async (req: Request, res: Response) => {
 		// Get products list from database
 		const productRepository = getRepository(Product);
 		const product = await productRepository.find({
@@ -17,7 +17,7 @@ class ProductController {
 	};
 
 	// Get one product by ID
-	static getOneById = async (req: Request, res: Response) => {
+	static GetOneProductById = async (req: Request, res: Response) => {
 		// Get the ID from the url
 		const product_id: string = req.params.id;
 
@@ -34,100 +34,6 @@ class ProductController {
 				status: 'false'
 			});
 		}
-	};
-
-	// Add new product
-	static newProduct = async (req: Request, res: Response) => {
-		// Get parameters from the body
-		let { name, category, count, price, menu_id } = req.body;
-		let product = new Product();
-
-		product.name = name;
-		product.category = category;
-		product.count = count;
-		product.price = price;
-		product.menu_id = menu_id;
-
-		// Validade if the parameters are ok
-		const errors = await validate(product);
-		if (errors.length > 0) {
-			res.status(400).send(errors);
-			return;
-		}
-
-		// Try to save. If fails, the name is already in use
-		const productRepository = getRepository(Product);
-		try {
-			await productRepository.save(product);
-		} catch (e) {
-			res.status(409).send('Product already exist');
-			return;
-		}
-
-		// If all ok, send 201 response
-		res.status(201).send('Product created successful');
-	};
-
-	// Edit Product by ID
-	static editProduct = async (req: Request, res: Response) => {
-		// Get the ID from the url
-		const id = req.params.id;
-
-		// Get values from the body
-		const { name, category, count, price, menu_id } = req.body;
-
-		// Try to find product on database
-		const productRepository = getRepository(Product);
-		let product: Product;
-		try {
-			product = await productRepository.findOneOrFail(id);
-		} catch (error) {
-			// If not found, send a 404 response
-			res.status(404).send('Product not found');
-			return;
-		}
-
-		// Validate the new values on model
-		product.name = name;
-		product.category = category;
-		product.count = count;
-		product.price = price;
-		product.menu_id = menu_id;
-
-		const errors = await validate(product);
-		if (errors.length > 0) {
-			res.status(400).send(errors);
-			return;
-		}
-
-		// Try to safe, if fails, that means product already in use
-		try {
-			await productRepository.save(product);
-		} catch (e) {
-			res.status(409).send('Product already in use');
-			return;
-		}
-		// After all send a 204 (no content)
-		res.status(204).send();
-	};
-
-	// Delete product by ID
-	static deleteProduct = async (req: Request, res: Response) => {
-		// Get the ID from the url
-		const id = req.params.id;
-
-		const productRepository = getRepository(Product);
-		let product: Product;
-		try {
-			product = await productRepository.findOneOrFail(id);
-		} catch (error) {
-			res.status(404).send('Product not found');
-			return;
-		}
-		productRepository.delete(id);
-
-		// After all send a 204 (no content)
-		res.status(204).send();
 	};
 }
 

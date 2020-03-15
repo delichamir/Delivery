@@ -7,7 +7,7 @@ import { Menu } from '../../entity/menu';
 
 class RestaurantController {
 	// listAll
-	static listAll = async (req: Request, res: Response) => {
+	static ListAllRestaurants = async (req: Request, res: Response) => {
 		// Get restaurants list from database
 		const restaurantRepository = getRepository(Restaurant);
 		const restaurant = await restaurantRepository.find({
@@ -18,7 +18,7 @@ class RestaurantController {
 	};
 
 	// Get one restaurant by ID
-	static getOneById = async (req: Request, res: Response) => {
+	static GetOneRestaurantById = async (req: Request, res: Response) => {
 		// Get the ID from the url
 		const restaurant_id: string = req.params.id;
 
@@ -77,96 +77,6 @@ class RestaurantController {
 
 		res.send(menu);
 		return;
-	};
-
-	// Add restaurant
-	static newRestaurant = async (req: Request, res: Response) => {
-		// Get parameters from the body
-		let { name, address, phone } = req.body;
-		let restaurant = new Restaurant();
-
-		restaurant.name = name;
-		restaurant.address = address;
-		restaurant.phone = phone;
-
-		// Validade if the parameters are ok
-		const errors = await validate(restaurant);
-		if (errors.length > 0) {
-			res.status(400).send(errors);
-			return;
-		}
-
-		// Try to save. If fails, the name is already in use
-		const restaurantRepository = getRepository(Restaurant);
-		try {
-			await restaurantRepository.save(restaurant);
-		} catch (e) {
-			res.status(409).send('Restaurant already exist');
-			return;
-		}
-
-		// If all ok, send 201 response
-		res.status(201).send('Restaurant created successful');
-	};
-
-	// Edit restaurant by id
-	static editRestaurant = async (req: Request, res: Response) => {
-		// Get the ID from the url
-		const id = req.params.id;
-
-		// Get values from the body
-		const { name, address, phone } = req.body;
-
-		// Try to find user on database
-		const restaurantRepository = getRepository(Restaurant);
-		let restaurant;
-		try {
-			restaurant = await restaurantRepository.findOneOrFail(id);
-		} catch (error) {
-			// If not found, send a 404 response
-			res.status(404).send('User not found');
-			return;
-		}
-
-		// Validate the new values on model
-		restaurant.name = name;
-		restaurant.address = address;
-		restaurant.phone = phone;
-
-		const errors = await validate(restaurant);
-		if (errors.length > 0) {
-			res.status(400).send(errors);
-			return;
-		}
-
-		// Try to safe, if fails, that means restaurant already in use
-		try {
-			await restaurantRepository.save(restaurant);
-		} catch (e) {
-			res.status(409).send('Restaurant already in use');
-			return;
-		}
-		// After all send a 204 (no content)
-		res.status(204).send();
-	};
-
-	// Delete Restaurant by id
-	static deleteRestaurant = async (req: Request, res: Response) => {
-		// Get the ID from the url
-		const id = req.params.id;
-
-		const restaurantRepository = getRepository(Restaurant);
-		let restaurant: Restaurant;
-		try {
-			restaurant = await restaurantRepository.findOneOrFail(id);
-		} catch (error) {
-			res.status(404).send('Restaurant not found');
-			return;
-		}
-		restaurantRepository.delete(id);
-
-		// After all send a 204 (no content)
-		res.status(204).send();
 	};
 }
 

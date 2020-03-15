@@ -9,35 +9,14 @@ const product_router = Router();
 product_router.get(
 	'/',
 	[checkJwt, checkRole(['ADMIN'])],
-	ProductController.listAll
+	ProductController.ListALLProducts
 );
 
 // Get product by id
 product_router.get(
 	'/:id([0-9]+)',
 	[checkJwt, checkRole(['ADMIN', 'CUSTOMER'])],
-	ProductController.getOneById
-);
-
-// Create a new product
-product_router.post(
-	'/add',
-	[checkJwt, checkRole(['ADMIN'])],
-	ProductController.newProduct
-);
-
-// Edit product by id
-product_router.patch(
-	'/edit/:id([0-9]+)',
-	[checkJwt, checkRole(['ADMIN'])],
-	ProductController.editProduct
-);
-
-// Delete product by id
-product_router.delete(
-	'/remove/:id([0-9]+)',
-	[checkJwt, checkRole(['ADMIN'])],
-	ProductController.deleteProduct
+	ProductController.GetOneProductById
 );
 
 export default product_router;
