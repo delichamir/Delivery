@@ -9,9 +9,16 @@ class UserController {
 		// Get clients from database
 		const userRepository = getRepository(Client);
 		const users = await userRepository.find({
-			select: ['id', 'full_name', 'phone', 'role', 'email', 'createdAt']
+			select: [
+				'id',
+				'full_name',
+				'phone',
+				'role',
+				'email',
+				'createdAt',
+				'updatedAt'
+			]
 		});
-
 		// Send the users object
 		res.send(users);
 	};

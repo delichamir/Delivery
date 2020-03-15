@@ -1,0 +1,92 @@
+import { Request, Response } from 'express';
+import { getRepository } from 'typeorm';
+import { validate } from 'class-validator';
+
+import { Order } from '../../entity/order';
+
+class OrderController {
+	// List of all orders
+	static ListAllOrders = async (req: Request, res: Response) => {
+		// Get order list from database
+		const orderRepository = getRepository(Order);
+		const order = await orderRepository.find({
+			select: [
+				'id',
+				'status',
+				'client_id',
+				'cart_id',
+				'createdAt',
+				'updatedAt'
+			]
+		});
+		res.send(order);
+	};
+
+	// Get one order
+	static GetOneOrderById = async (req: Request, res: Response) => {
+		// Get the ID from the url
+		const id: string = req.params.id;
+		// Get the order from database
+		const orderRepository = getRepository(Order);
+		try {
+			const order = await orderRepository.findOneOrFail(id, {
+				select: [
+					'status',
+					'client_id',
+					'cart_id',
+					'createdAt',
+					'updatedAt'
+				]
+			});
+		} catch (error) {
+			res.status(404).json({
+				message: 'Order not found.',
+				status: 'false'
+			});
+		}
+	};
+
+	// Add order
+	static AddOrder = async (req: Request, res: Response) => {
+		// Get parameters from the body
+		let { status, client_id, cart_id } = req.body;
+		if (!(status && client_id && cart_id)) {
+			res.status(400).json({
+				message: 'status, client_id and cart_id is required.',
+				status: 'false'
+			});
+		}
+		let order = new Order();
+
+		order.status = status;
+		order.client_id = client_id;
+		order.cart_id = cart_id;
+
+		// Validade if the parameters are ok
+		const errors = await validate(order);
+		if (errors.length > 0) {
+			res.status(400).send(errors);
+			return;
+		}
+
+		// Try to save.
+		const orderRepository = getRepository(Order);
+		try {
+			await orderRepository.save(order);
+		} catch (error) {
+			res.status(409).json({
+				message: 'Order already exist.',
+				status: 'false'
+			});
+			return;
+		}
+
+		// If all ok, send 201 response
+		res.status(201).json({
+			message: 'Order added successful.',
+			status: 'true'
+		});
+	};
+}
+
+export default OrderController;

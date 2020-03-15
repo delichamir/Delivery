@@ -5,34 +5,39 @@ import { validate } from 'class-validator';
 import { Menu } from '../../entity/menu';
 
 class MenuController {
-	// listAll
+	// List of all menu
 	static listAll = async (req: Request, res: Response) => {
 		// Get menu list from database
 		const menuRepository = getRepository(Menu);
-		const product = await menuRepository.find({
-			select: ['id', 'name']
+		const menu = await menuRepository.find({
+			select: ['id', 'name', 'restaurant_id']
 		});
 
-		res.send(product);
+		res.send(menu);
 	};
 
-	// getOneById
+	// Get one menu by ID
 	static getOneById = async (req: Request, res: Response) => {
 		// Get the ID from the url
-		const id: string = req.params.id;
+		const menu_id: string = req.params.id;
 
 		// Get the menu from database
 		const menuRepository = getRepository(Menu);
+
 		try {
-			const user = await menuRepository.findOneOrFail(id, {
-				select: ['id', 'name']
+			const menu = await menuRepository.findOneOrFail(menu_id, {
+				select: ['id', 'name', 'restaurant_id']
 			});
+			res.send(menu);
 		} catch (error) {
-			res.status(404).send('Product not found');
+			res.status(404).json({
+				message: 'Menu not found.',
+				status: 'false'
+			});
 		}
 	};
 
-	//newMenu
+	// Add new menu
 	static newMenu = async (req: Request, res: Response) => {
 		// Get parameters from the body
 		let { name } = req.body;
@@ -52,30 +57,39 @@ class MenuController {
 		try {
 			await menuRepository.save(menu);
 		} catch (e) {
-			res.status(409).send('Menu already exist');
+			res.status(409).json({
+				message: 'Menu already exist.',
+				status: 'false'
+			});
 			return;
 		}
 
 		// If all ok, send 201 response
-		res.status(201).send('Menu created successful');
+		res.status(201).json({
+			message: 'Menu created successful.',
+			status: 'true'
+		});
 	};
 
-	// editMenu
+	// Edit menu by ID
 	static editMenu = async (req: Request, res: Response) => {
 		// Get the ID from the url
 		const id = req.params.id;
 
 		// Get values from the body
-		const { name, category, count, price, menu_id } = req.body;
+		const { name, menu_id } = req.body;
 
-		// Try to find user on database
+		// Try to find menu on database
 		const menuRepository = getRepository(Menu);
 		let menu: Menu;
 		try {
 			menu = await menuRepository.findOneOrFail(id);
 		} catch (error) {
 			// If not found, send a 404 response
-			res.status(404).send('Menu not found');
+			res.status(404).json({
+				message: 'Menu not found.',
+				status: 'false'
+			});
 			return;
 		}
 
@@ -92,14 +106,20 @@ class MenuController {
 		try {
 			await menuRepository.save(name);
 		} catch (e) {
-			res.status(409).send('Menu already in use');
+			res.status(409).json({
+				message: 'Menu alreadyin use.',
+				status: 'false'
+			});
 			return;
 		}
 		// After all send a 204 (no content)
-		res.status(204).send();
+		res.status(204).json({
+			message: 'No content',
+			status: 'false'
+		});
 	};
 
-	// deleteMenu
+	// Delete menu by ID
 	static deleteMenu = async (req: Request, res: Response) => {
 		// Get the ID from the url
 		const id = req.params.id;
@@ -109,13 +129,19 @@ class MenuController {
 		try {
 			menu = await menuRepository.findOneOrFail(id);
 		} catch (error) {
-			res.status(404).send('Menu not found');
+			res.status(404).json({
+				message: 'Menu not found.',
+				status: 'false'
+			});
 			return;
 		}
 		menuRepository.delete(id);
 
 		// After all send a 204 (no content)
-		res.status(204).send();
+		res.status(204).json({
+			message: 'No content.',
+			status: 'false'
+		});
 	};
 }
 

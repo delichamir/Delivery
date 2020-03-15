@@ -3,37 +3,41 @@ import ProductController from '../controllers/ProductController';
 import { checkJwt } from '../../middlewares/checkJwt';
 import { checkRole } from '../../middlewares/checkRole';
 
-const router = Router();
+const product_router = Router();
 
 // Get all products
-router.get('/', [checkJwt, checkRole(['ADMIN'])], ProductController.listAll);
+product_router.get(
+	'/',
+	[checkJwt, checkRole(['ADMIN'])],
+	ProductController.listAll
+);
 
 // Get product by id
-router.get(
+product_router.get(
 	'/:id([0-9]+)',
-	[checkJwt, checkRole(['ADMIN'])],
+	[checkJwt, checkRole(['ADMIN', 'CUSTOMER'])],
 	ProductController.getOneById
 );
 
 // Create a new product
-router.post(
+product_router.post(
 	'/add',
 	[checkJwt, checkRole(['ADMIN'])],
 	ProductController.newProduct
 );
 
 // Edit product by id
-router.patch(
+product_router.patch(
 	'/edit/:id([0-9]+)',
 	[checkJwt, checkRole(['ADMIN'])],
 	ProductController.editProduct
 );
 
 // Delete product by id
-router.delete(
+product_router.delete(
 	'/remove/:id([0-9]+)',
 	[checkJwt, checkRole(['ADMIN'])],
 	ProductController.deleteProduct
 );
 
-export default router;
+export default product_router;

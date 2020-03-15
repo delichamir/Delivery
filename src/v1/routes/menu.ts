@@ -3,33 +3,36 @@ import MenuController from '../controllers/MenuController';
 import { checkJwt } from '../../middlewares/checkJwt';
 import { checkRole } from '../../middlewares/checkRole';
 
-const router = Router();
+const menu_router = Router();
 
 // Get all menu
-router.get('/', [checkJwt, checkRole(['ADMIN'])], MenuController.listAll);
+menu_router.get('/', [checkJwt, checkRole(['ADMIN'])], MenuController.listAll);
 
 // Get menu by id
-router.get(
+menu_router.get(
 	'/:id([0-9]+)',
 	[checkJwt, checkRole(['ADMIN', 'CUSTOMER'])],
 	MenuController.getOneById
 );
 
 // Create a new menu
-router.post('/add', [checkJwt, checkRole(['ADMIN'])], MenuController.newMenu);
+menu_router.post(
+	'/add',
+	[checkJwt, checkRole(['ADMIN'])],
+	MenuController.newMenu
+);
 
 // Edit menu by id
-router.patch(
+menu_router.patch(
 	'/edit/:id([0-9]+)',
 	[checkJwt, checkRole(['ADMIN'])],
 	MenuController.editMenu
 );
 
 // Delete menu by id
-router.delete(
+menu_router.delete(
 	'/remove/:id([0-9]+)',
 	[checkJwt, checkRole(['ADMIN'])],
 	MenuController.deleteMenu
 );
-
-export default router;
+export default menu_router;

@@ -148,7 +148,7 @@ export class AddProduct1584201906921 implements MigrationInterface {
 		product18.category = 'Пицца';
 		product18.price = 250;
 		product18.count = 10;
-		product18.menu_id = 1;
+		product18.menu_id = 2;
 		await productRepository.save(product18);
 
 		let product19 = new Product();
@@ -156,7 +156,7 @@ export class AddProduct1584201906921 implements MigrationInterface {
 		product19.category = 'Пицца';
 		product19.price = 300;
 		product19.count = 10;
-		product19.menu_id = 1;
+		product19.menu_id = 2;
 		await productRepository.save(product19);
 
 		let product20 = new Product();
@@ -164,7 +164,7 @@ export class AddProduct1584201906921 implements MigrationInterface {
 		product20.category = 'Пицца';
 		product20.price = 350;
 		product20.count = 10;
-		product20.menu_id = 1;
+		product20.menu_id = 2;
 		await productRepository.save(product20);
 
 		let product21 = new Product();
@@ -172,7 +172,7 @@ export class AddProduct1584201906921 implements MigrationInterface {
 		product21.category = 'Закуски';
 		product21.price = 150;
 		product21.count = 10;
-		product21.menu_id = 1;
+		product21.menu_id = 2;
 		await productRepository.save(product21);
 
 		let product22 = new Product();
@@ -180,7 +180,7 @@ export class AddProduct1584201906921 implements MigrationInterface {
 		product22.category = 'Закуски';
 		product22.price = 60;
 		product22.count = 10;
-		product22.menu_id = 1;
+		product22.menu_id = 2;
 		await productRepository.save(product22);
 
 		let product23 = new Product();
@@ -188,7 +188,7 @@ export class AddProduct1584201906921 implements MigrationInterface {
 		product23.category = 'Соусы';
 		product23.price = 15;
 		product23.count = 10;
-		product23.menu_id = 1;
+		product23.menu_id = 2;
 		await productRepository.save(product23);
 
 		let product24 = new Product();
@@ -196,7 +196,7 @@ export class AddProduct1584201906921 implements MigrationInterface {
 		product24.category = 'Соусы';
 		product24.price = 15;
 		product24.count = 10;
-		product24.menu_id = 1;
+		product24.menu_id = 2;
 		await productRepository.save(product24);
 
 		let product25 = new Product();
@@ -204,7 +204,7 @@ export class AddProduct1584201906921 implements MigrationInterface {
 		product25.category = 'Соусы';
 		product25.price = 31500;
 		product25.count = 10;
-		product25.menu_id = 1;
+		product25.menu_id = 2;
 		await productRepository.save(product25);
 
 		let product26 = new Product();
@@ -212,7 +212,7 @@ export class AddProduct1584201906921 implements MigrationInterface {
 		product26.category = 'Напитки';
 		product26.price = 45;
 		product26.count = 10;
-		product26.menu_id = 1;
+		product26.menu_id = 2;
 		await productRepository.save(product26);
 
 		let product27 = new Product();
@@ -220,7 +220,7 @@ export class AddProduct1584201906921 implements MigrationInterface {
 		product27.category = 'Напитки';
 		product27.price = 45;
 		product27.count = 10;
-		product27.menu_id = 1;
+		product27.menu_id = 2;
 		await productRepository.save(product27);
 
 		let product28 = new Product();
@@ -228,7 +228,7 @@ export class AddProduct1584201906921 implements MigrationInterface {
 		product28.category = 'Напитки';
 		product28.price = 45;
 		product28.count = 10;
-		product28.menu_id = 1;
+		product28.menu_id = 2;
 		await productRepository.save(product28);
 
 		// Add products to menu_3
@@ -237,7 +237,7 @@ export class AddProduct1584201906921 implements MigrationInterface {
 		product29.category = 'Пицца';
 		product29.price = 250;
 		product29.count = 10;
-		product29.menu_id = 1;
+		product29.menu_id = 3;
 		await productRepository.save(product29);
 
 		let product30 = new Product();
@@ -245,7 +245,7 @@ export class AddProduct1584201906921 implements MigrationInterface {
 		product30.category = 'Пицца';
 		product30.price = 350;
 		product30.count = 10;
-		product30.menu_id = 1;
+		product30.menu_id = 3;
 		await productRepository.save(product30);
 
 		let product31 = new Product();
@@ -253,7 +253,7 @@ export class AddProduct1584201906921 implements MigrationInterface {
 		product31.category = 'Пицца';
 		product31.price = 240;
 		product31.count = 10;
-		product31.menu_id = 1;
+		product31.menu_id = 3;
 		await productRepository.save(product31);
 
 		let product32 = new Product();
@@ -261,7 +261,7 @@ export class AddProduct1584201906921 implements MigrationInterface {
 		product32.category = 'Пицца';
 		product32.price = 400;
 		product32.count = 10;
-		product32.menu_id = 1;
+		product32.menu_id = 3;
 		await productRepository.save(product32);
 
 		let product33 = new Product();
@@ -269,7 +269,7 @@ export class AddProduct1584201906921 implements MigrationInterface {
 		product33.category = 'Закуски';
 		product33.price = 90;
 		product33.count = 10;
-		product33.menu_id = 1;
+		product33.menu_id = 3;
 		await productRepository.save(product33);
 
 		let product34 = new Product();
@@ -277,7 +277,7 @@ export class AddProduct1584201906921 implements MigrationInterface {
 		product34.category = 'Закуски';
 		product34.price = 60;
 		product34.count = 10;
-		product34.menu_id = 1;
+		product34.menu_id = 3;
 		await productRepository.save(product34);
 
 		let product35 = new Product();
@@ -285,7 +285,7 @@ export class AddProduct1584201906921 implements MigrationInterface {
 		product35.category = 'Соусы';
 		product35.price = 15;
 		product35.count = 10;
-		product35.menu_id = 1;
+		product35.menu_id = 3;
 		await productRepository.save(product35);
 
 		let product36 = new Product();
@@ -293,7 +293,7 @@ export class AddProduct1584201906921 implements MigrationInterface {
 		product36.category = 'Соусы';
 		product36.price = 31500;
 		product36.count = 10;
-		product36.menu_id = 1;
+		product36.menu_id = 3;
 		await productRepository.save(product36);
 
 		let product37 = new Product();
@@ -301,7 +301,7 @@ export class AddProduct1584201906921 implements MigrationInterface {
 		product37.category = 'Напитки';
 		product37.price = 45;
 		product37.count = 10;
-		product37.menu_id = 1;
+		product37.menu_id = 3;
 		await productRepository.save(product37);
 
 		let product38 = new Product();
@@ -309,7 +309,7 @@ export class AddProduct1584201906921 implements MigrationInterface {
 		product38.category = 'Напитки';
 		product38.price = 45;
 		product38.count = 10;
-		product38.menu_id = 1;
+		product38.menu_id = 3;
 		await productRepository.save(product38);
 	}
 

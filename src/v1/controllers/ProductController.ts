@@ -5,7 +5,7 @@ import { validate } from 'class-validator';
 import { Product } from '../../entity/product';
 
 class ProductController {
-	// listAll
+	// List of all products
 	static listAll = async (req: Request, res: Response) => {
 		// Get products list from database
 		const productRepository = getRepository(Product);
@@ -16,23 +16,27 @@ class ProductController {
 		res.send(product);
 	};
 
-	// getOneById
+	// Get one product by ID
 	static getOneById = async (req: Request, res: Response) => {
 		// Get the ID from the url
-		const id: string = req.params.id;
+		const product_id: string = req.params.id;
 
 		// Get the product from database
 		const productRepository = getRepository(Product);
 		try {
-			const product = await productRepository.findOneOrFail(id, {
+			const product = await productRepository.findOneOrFail(product_id, {
 				select: ['id', 'name', 'category', 'count', 'price', 'menu_id']
 			});
+			res.send(product);
 		} catch (error) {
-			res.status(404).send('Product not found');
+			res.status(404).json({
+				message: 'Product not found.',
+				status: 'false'
+			});
 		}
 	};
 
-	//newProduct
+	// Add new product
 	static newProduct = async (req: Request, res: Response) => {
 		// Get parameters from the body
 		let { name, category, count, price, menu_id } = req.body;
@@ -64,7 +68,7 @@ class ProductController {
 		res.status(201).send('Product created successful');
 	};
 
-	// editProduct
+	// Edit Product by ID
 	static editProduct = async (req: Request, res: Response) => {
 		// Get the ID from the url
 		const id = req.params.id;
@@ -72,7 +76,7 @@ class ProductController {
 		// Get values from the body
 		const { name, category, count, price, menu_id } = req.body;
 
-		// Try to find user on database
+		// Try to find product on database
 		const productRepository = getRepository(Product);
 		let product: Product;
 		try {
@@ -107,7 +111,7 @@ class ProductController {
 		res.status(204).send();
 	};
 
-	// deleteProduct
+	// Delete product by ID
 	static deleteProduct = async (req: Request, res: Response) => {
 		// Get the ID from the url
 		const id = req.params.id;
