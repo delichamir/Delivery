@@ -15,24 +15,4 @@ menu_router.get(
 	MenuController.getOneById
 );
 
-// Create a new menu
-menu_router.post(
-	'/add',
-	[checkJwt, checkRole(['ADMIN'])],
-	MenuController.newMenu
-);
-
-// Edit menu by id
-menu_router.patch(
-	'/edit/:id([0-9]+)',
-	[checkJwt, checkRole(['ADMIN'])],
-	MenuController.editMenu
-);
-
-// Delete menu by id
-menu_router.delete(
-	'/remove/:id([0-9]+)',
-	[checkJwt, checkRole(['ADMIN'])],
-	MenuController.deleteMenu
-);
 export default menu_router;

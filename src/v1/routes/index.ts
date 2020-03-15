@@ -6,6 +6,7 @@ import product from './product';
 import menu from './menu';
 import cartproduct from './cartproduct';
 import cart from './cart';
+import order from './order';
 
 const routes = Router();
 
@@ -21,6 +22,6 @@ routes.use('/product', product);
 routes.use('/menu', menu);
 routes.use('/cartproduct', cartproduct);
 routes.use('/cart', cart);
-// routes.use('/order', order);
+routes.use('/order', order);
 
 export default routes;

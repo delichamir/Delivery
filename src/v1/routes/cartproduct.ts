@@ -26,17 +26,4 @@ cartproduct_router.post(
 	CartProductController.AddCartProduct
 );
 
-// Edit cart product by ID
-cartproduct_router.patch(
-	'/edit/:id([0-9]+)',
-	[checkJwt, checkRole(['ADMIN'])],
-	CartProductController.EditCartProduct
-);
-
-// Delete cart product by ID
-cartproduct_router.delete(
-	'/remove/:id([0-9]+)',
-	[checkJwt, checkRole(['ADMIN', 'CUSTOMER'])],
-	CartProductController.DeleteCartProduct
-);
 export default cartproduct_router;
