@@ -26,4 +26,4 @@ order_router.post(
 	OrderController.AddOrder
 );
 
-export default cart_router;
+export default order_router;

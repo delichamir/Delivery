@@ -24,14 +24,14 @@ restaurant_router.get(
 restaurant_router.get(
 	'/:id([0-9]+)/menu',
 	[checkJwt, checkRole(['ADMIN', 'CUSTOMER'])],
-	RestaurantController.restaurantMenuList
+	RestaurantController.RestaurantMenuList
 );
 
 // Get one menu of restaurant
 restaurant_router.get(
 	'/:id([0-9]+)/menu/:menu_id([0-9]+)',
 	[checkJwt, checkRole(['ADMIN', 'CUSTOMER'])],
-	RestaurantController.restaurantMenuOne
+	RestaurantController.RestaurantMenuOne
 );
 
 export default restaurant_router;

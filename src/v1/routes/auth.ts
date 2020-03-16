@@ -2,12 +2,12 @@ import { Router } from 'express';
 import AuthController from '../controllers/AuthController';
 import { checkJwt } from '../../middlewares/checkJwt';
 
-const router = Router();
+const auth_router = Router();
 
 // Adding login route
-router.post('/login', AuthController.login);
+auth_router.post('/login', AuthController.login);
 
 // Adding "change password" route
-router.post('/change-password', [checkJwt], AuthController.changePassword);
+auth_router.post('/change-password', [checkJwt], AuthController.changePassword);
 
-export default router;
+export default auth_router;

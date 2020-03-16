@@ -36,10 +36,9 @@ class CartProductController {
 	// Add cart product
 	static AddCartProduct = async (req: Request, res: Response) => {
 		// Get parameters from the body
-		let { id, cart_id, product_id, quantity } = req.body;
+		let { cart_id, product_id, quantity } = req.body;
 		let cartproduct = new Cart_product();
 
-		cartproduct.id = id;
 		cartproduct.cart_id = cart_id;
 		cartproduct.product_id = product_id;
 		cartproduct.quantity = quantity;

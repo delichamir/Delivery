@@ -40,7 +40,7 @@ class RestaurantController {
 		}
 	};
 
-	static restaurantMenuList = async (req: Request, res: Response) => {
+	static RestaurantMenuList = async (req: Request, res: Response) => {
 		// Get menu list from database for corrent restaurant
 		const restaurant_id: string = req.params.id;
 		const menu = await getRepository(Menu)
@@ -53,7 +53,7 @@ class RestaurantController {
 		return;
 	};
 
-	static restaurantMenuOne = async (req: Request, res: Response) => {
+	static RestaurantMenuOne = async (req: Request, res: Response) => {
 		// Get one menu from database for corrent restaurant
 		const restaurant_id: string = req.params.id;
 		const menu_id: string = req.params.menu_id;
