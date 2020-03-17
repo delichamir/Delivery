@@ -58,23 +58,21 @@ class RestaurantController {
 		const restaurant_id: string = req.params.id;
 		const menu_id: string = req.params.menu_id;
 
-		const menu = await getRepository(Menu)
-			.createQueryBuilder('menu')
-			.select([
-				'menu.id',
-				'menu.name'
-				// 'product.id',
-				// 'product.name',
-				// 'product.category',
-				// 'product.count',
-				// 'product.price'
-			])
-			.where('menu.restaurant_id = :id AND menu.id = :m_id', {
-				id: restaurant_id,
-				m_id: menu_id
-			})
-			.getOne();
+		// const menu = await getRepository(Menu)
+		// 	.createQueryBuilder('product')
+		// 	.leftJoinAndSelect('product.menu_id', 'menu')
+		// 	.select(['menu.id', 'menu.name'])
+		// 	.where('menu.restaurant_id = :id AND menu.id = :m_id', {
+		// 		id: restaurant_id,
+		// 		m_id: menu_id
+		// 	})
+		// 	.getOne();
 
+		const menu = await getRepository(Menu).query(`
+			SELECT menu.id, menu.name, product.id, product.name, product.category, product.count, product.price FROM menu
+			LEFT JOIN product ON menu.id = product.menu_id
+			WHERE menu.restaurant_id = ${restaurant_id} AND menu.id = ${menu_id};
+		`);
 		res.send(menu);
 		return;
 	};

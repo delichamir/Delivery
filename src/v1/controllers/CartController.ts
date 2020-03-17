@@ -22,9 +22,13 @@ class CartController {
 		// Get the cart from database
 		const cartRepository = getRepository(Cart);
 		try {
-			const cart = await cartRepository.findOneOrFail(id, {
-				select: ['client_id', 'amount', 'createdAt', 'updatedAt']
-			});
+			const cart = await getRepository(Cart).query(`
+			SELECT  cart.client_id, cart.amount, cart."createdAt", cart."updatedAt", cart_product.product_id, cart_product.quantity FROM cart_product
+			LEFT JOIN cart ON cart.id = cart_product.cart_id;
+		`);
+
+			res.send(cart);
+			return;
 		} catch (error) {
 			res.status(404).json({
 				message: 'Cart not found.',

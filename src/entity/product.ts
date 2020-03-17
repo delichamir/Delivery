@@ -1,5 +1,12 @@
-import { Entity, PrimaryGeneratedColumn, Column, Unique } from 'typeorm';
+import {
+	Entity,
+	PrimaryGeneratedColumn,
+	Column,
+	Unique,
+	ManyToOne
+} from 'typeorm';
 import { Length, IsNotEmpty } from 'class-validator';
+import { Menu } from './menu';
 
 @Entity()
 @Unique(['menu_id'])
@@ -23,4 +30,10 @@ export class Product {
 
 	@Column()
 	menu_id: number;
+
+	// @ManyToOne(
+	// 	type => Menu,
+	// 	menu => menu.id
+	// )
+	// menu_id: Menu;
 }

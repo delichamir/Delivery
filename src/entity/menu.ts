@@ -1,5 +1,12 @@
-import { Entity, PrimaryGeneratedColumn, Column, Unique } from 'typeorm';
+import {
+	Entity,
+	PrimaryGeneratedColumn,
+	Column,
+	Unique,
+	OneToMany
+} from 'typeorm';
 import { Length, IsNotEmpty } from 'class-validator';
+import { Product } from './product';
 
 @Entity()
 @Unique(['restaurant_id'])
@@ -13,4 +20,10 @@ export class Menu {
 
 	@Column()
 	restaurant_id: number;
+
+	// @OneToMany(
+	// 	type => Product,
+	// 	product => product.menu
+	// )
+	// product: Product[];
 }
