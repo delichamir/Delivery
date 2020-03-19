@@ -26,4 +26,11 @@ order_router.post(
 	OrderController.AddOrder
 );
 
+// Count of client's orders in each restaurant
+order_router.get(
+	'/history/restaurants',
+	[checkJwt, checkRole(['ADMIN'])],
+	OrderController.OrderHistoryRestaurants
+);
+
 export default order_router;

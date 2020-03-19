@@ -49,18 +49,17 @@ class OrderController {
 	// Add order
 	static AddOrder = async (req: Request, res: Response) => {
 		// Get parameters from the body
-		let { status, client_id, cart_id } = req.body;
-		if (!(status && client_id && cart_id)) {
+		let { cart_id } = req.body;
+		if (!cart_id) {
 			res.status(400).json({
-				message: 'status, client_id and cart_id is required.',
+				message: 'cart_id is required.',
 				status: 'false'
 			});
 		}
 		let order = new Order();
 
-		order.status = status;
-		order.client_id = client_id;
 		order.cart_id = cart_id;
+		order.status = 'Created';
 
 		// Validade if the parameters are ok
 		const errors = await validate(order);
@@ -86,6 +85,26 @@ class OrderController {
 			message: 'Order added successful.',
 			status: 'true'
 		});
+	};
+
+	// Count of client's orders in each restaurant
+	static OrderHistoryRestaurants = async (req: Request, res: Response) => {
+		const datefrom: string = req.body.DateFrom;
+		const dateto: string = req.body.DateTo;
+		const format = new RegExp(
+			'[0-9]{4}[-]{1}[0-9]{2}[-]{1}[0-9]{2}[T]{1}[0-9]{2}[:]{1}[0-9]{2}[:]{1}[0-9]{2}[Z]{1}'
+		);
+
+		if (!(format.test(datefrom) && format.test(dateto))) {
+			res.status(400).json({
+				message:
+					'Date format is incorrect, please enter Date in this format: 2020-01-01T00:00:00Z',
+				status: 'false'
+			});
+			return;
+		}
+
+		// TO DO response list of restaurants with client's orders
 	};
 }
 

@@ -73,8 +73,7 @@ class CartController {
 
 		// If all ok, send 201 response
 		res.status(201).json({
-			message: 'Cart added successful.',
-			status: 'true'
+			message: 'Cart added successful.'
 		});
 	};
 }
