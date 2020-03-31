@@ -95,15 +95,16 @@ class OrderController {
 			'[0-9]{4}[-]{1}[0-9]{2}[-]{1}[0-9]{2}[T]{1}[0-9]{2}[:]{1}[0-9]{2}[:]{1}[0-9]{2}[Z]{1}'
 		);
 
+		// Check validate input params in request
 		if (!(format.test(datefrom) && format.test(dateto))) {
 			res.status(400).json({
 				message:
-					'Date format is incorrect, please enter Date in this format: 2020-01-01T00:00:00Z',
+					'Bad date format, required date format: "2020-01-01T00:00:00Z" ',
 				status: 'false'
 			});
 			return;
 		}
-
+		res.send('Good one!');
 		// TO DO response list of restaurants with client's orders
 	};
 }
