@@ -105,7 +105,7 @@ class OrderController {
 			return;
 		}
 		res.send("ToDo: response list of restaurants with client's orders ");
-		// TO DO response list of restaurants with client's orders
+		// ToDo
 	};
 }
 
