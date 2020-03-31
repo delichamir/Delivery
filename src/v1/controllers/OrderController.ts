@@ -104,7 +104,7 @@ class OrderController {
 			});
 			return;
 		}
-		res.send('Good one!');
+		res.send("ToDo: response list of restaurants with client's orders ");
 		// TO DO response list of restaurants with client's orders
 	};
 }
